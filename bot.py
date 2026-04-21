@@ -14,15 +14,15 @@ with open('lang.yaml', 'r', encoding='utf-8') as f:
 TOKEN = os.getenv('TOKEN')
 
 if not TOKEN:
-    raise ValueError("❌ TOKEN не найден!")
+    raise ValueError("❌ TOKEN не найден! Добавь его в Variables на Railway или export на сервере")
 
 bot = telebot.TeleBot(TOKEN)
 
-# ←←←← ЭТО САМОЕ ВАЖНОЕ ←←←←
+# Удаляем старый webhook (чтобы избежать ошибки 409)
 bot.delete_webhook(drop_pending_updates=True)
 print("✅ Webhook удалён, старые процессы сброшены")
 
-print("✅ Бот запущен на Railway | Профит с Уолл-Стрит")
+print("✅ Бот запущен | Профит с Уолл-Стрит")
 
 @bot.message_handler(commands=['start'])
 def start(message):
