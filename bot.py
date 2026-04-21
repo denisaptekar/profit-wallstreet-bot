@@ -14,27 +14,30 @@ with open('lang.yaml', 'r', encoding='utf-8') as f:
 TOKEN = os.getenv('TOKEN')
 
 if not TOKEN:
-    raise ValueError("TOKEN не найден! Добавь его в Variables на Railway")
+    raise ValueError("❌ TOKEN не найден! Добавь его в Variables на Railway")
 
 bot = telebot.TeleBot(TOKEN)
 
 print("✅ Бот запущен на Railway | Профит с Уолл-Стрит")
 
-# Команды
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, lang['welcome'].format(first_name=message.from_user.first_name), parse_mode='HTML')
+    welcome_text = lang.get('welcome', 'Добро пожаловать!')
+    bot.send_message(
+        message.chat.id, 
+        welcome_text.format(first_name=message.from_user.first_name), 
+        parse_mode='HTML'
+    )
 
 @bot.message_handler(commands=['signals'])
 def send_signal(message):
-    game = random.choice(list(config.get('signals', {}).keys()) if 'signals' in config else ["Lucky Jet", "Mines", "Aviator"])
-    # Пока используем простые сигналы (можно расширить позже)
     signals = {
         "Lucky Jet": ["Выходи на ×1.75 – 2.1", "Жди ×3.0+", "Сейчас безопасно до ×1.6"],
         "Mines": ["Открывай углы: 1-2-4", "Избегай центра"],
         "Aviator": ["Вылетай на ×2.0 – 2.6"]
     }
-    signal = random.choice(signals.get(game, ["Сигнал готов"]))
+    game = random.choice(list(signals.keys()))
+    signal = random.choice(signals[game])
     
     text = f"""
 🚀 **Новый сигнал от AI**
