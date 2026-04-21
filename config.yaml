@@ -1,4 +1,4 @@
-BOT_TOKEN: "8702073880:AAFgTJyVtofECIcyE2AwJGCt0giqph4QGH8"  # токен бота
+BOT_TOKEN: "8790173158:AAEBpoUx_8QHL0AHae7Xox1VEzcqdo9Ul2A"  # токен бота
 CHANNEL_URL: "https://t.me/profit_wollstreet"  # Ссылка на канал
 CHANNEL_ID: "-1003979747241"  # айди своего основного канала, начинается с -
 VERIF_CHANNEL_ID: "-1003807106897"  # айди канала для отчётов, начинается с -
