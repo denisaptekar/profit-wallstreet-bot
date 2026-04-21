@@ -4,7 +4,7 @@ import time
 import os
 import yaml
 
-# Загружаем конфиг и языковые файлы
+# Загружаем конфиг и языки
 with open('config.yaml', 'r', encoding='utf-8') as f:
     config = yaml.safe_load(f)
 
@@ -14,9 +14,13 @@ with open('lang.yaml', 'r', encoding='utf-8') as f:
 TOKEN = os.getenv('TOKEN')
 
 if not TOKEN:
-    raise ValueError("❌ TOKEN не найден! Добавь его в Variables на Railway")
+    raise ValueError("❌ TOKEN не найден!")
 
 bot = telebot.TeleBot(TOKEN)
+
+# ←←←← ЭТО САМОЕ ВАЖНОЕ ←←←←
+bot.delete_webhook(drop_pending_updates=True)
+print("✅ Webhook удалён, старые процессы сброшены")
 
 print("✅ Бот запущен на Railway | Профит с Уолл-Стрит")
 
